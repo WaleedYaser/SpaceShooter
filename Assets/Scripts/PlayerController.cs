@@ -24,9 +24,12 @@ public class PlayerController : MonoBehaviour {
 	private float horizontalVelocity, verticalVelocity;
 	private Vector3 shipVelocity;
 
+	private AudioSource myAudioSource;
+
 	private void Start()
 	{
 		myRigidBody = GetComponent<Rigidbody> ();
+		myAudioSource = GetComponent<AudioSource> ();
 	}
 
 	private void Update()
@@ -34,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 		if (Input.GetButton ("Fire1") && Time.time > nextTime) {
 			nextTime = Time.time + fireRate;
 			GameObject copy = Instantiate (boltPrefab, shotSpawn.position, shotSpawn.rotation);
+			myAudioSource.Play ();
 		}
 	}
 
