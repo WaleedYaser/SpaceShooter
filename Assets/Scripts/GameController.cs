@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 	
-	public GameObject enemy;
+	public GameObject[] enemies;
 	public Vector3 spawnValues;
 
 	public int enemyCount = 10;
@@ -50,6 +50,7 @@ public class GameController : MonoBehaviour {
 
 		while (true) {
 			for (int i = 0; i < enemyCount; i++) {
+				GameObject enemy = enemies[Random.Range(0, enemies.Length)];
 				spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
 				Instantiate (enemy, spawnPosition, Quaternion.identity);
 				yield return new WaitForSeconds (spawnWait);
