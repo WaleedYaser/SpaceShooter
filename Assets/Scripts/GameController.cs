@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour {
 	public Text scoreText;
 	public Text gameOverText;
 	public Text restartText;
+	public GameObject restartButton;
 
 	private int score;
 	private bool gameOver;
@@ -29,7 +30,8 @@ public class GameController : MonoBehaviour {
 		gameOver = false;
 		restart = false;
 		gameOverText.text = "";
-		restartText.text = "";
+		// restartText.text = "";
+		restartButton.SetActive(false);
 
 		score = 0;
 		UpdateScore ();
@@ -37,12 +39,12 @@ public class GameController : MonoBehaviour {
 		StartCoroutine (SpawnWaves ());
 	}
 
-	private void Update()
-	{
-		if (restart && Input.GetKeyDown (KeyCode.R)) {
-			SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
-		}
-	}
+	// private void Update()
+	// {
+	// 	if (restart && Input.GetKeyDown (KeyCode.R)) {
+	// 		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
+	// 	}
+	// }
 
 	private IEnumerator SpawnWaves()
 	{
@@ -58,8 +60,9 @@ public class GameController : MonoBehaviour {
 			yield return new WaitForSeconds (waveWait);
 
 			if (gameOver) {
-				restart = true;
-				restartText.text = "Press 'R' to restart";
+				// restart = true;
+				// restartText.text = "Press 'R' to restart";
+				restartButton.SetActive(true);
 				break;
 			}
 		}
@@ -80,5 +83,10 @@ public class GameController : MonoBehaviour {
 	private void UpdateScore()
 	{
 		scoreText.text = "Score: " + score;
+	}
+
+	public void RestartGame()
+	{
+		SceneManager.LoadScene (SceneManager.GetActiveScene ().name);
 	}
 }
